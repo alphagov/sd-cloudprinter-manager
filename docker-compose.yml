@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  token:
+    image: mysql:latest
+    restart: always
+    env_file: ./docker/db/mysql/mysql.env
+    volumes:
+      - tokendb:/var/lib/mysql
+    networks:
+      - gcprint
+  
+  auth:
+    image: mongo:latest
+    volumes:
+      - authdb:/data/db
+    networks:
+      - gcprint
+
+  server:
+    build: 
+      context: ./server
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules/
+    depends_on:
+      - token
+      - auth
+    ports:
+      - 5060:5060
+    networks:
+      - gcprint
+    command: ["nodemon", "index.js"]
+
+volumes:
+  tokendb:
+  authdb:
+
+networks:
+  gcprint:
