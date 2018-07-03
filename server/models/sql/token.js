@@ -15,7 +15,7 @@ module.exports = (sequelize, dataTypes) => {
       console.log('MYSQL vouchercode table created/synced successfully');
     })
     .catch(err => {
-      console.log('An error occur while creating MYSQL table');
+      console.log('An error occur while creating the MYSQL table', err);
     });
   return TokenCode;
 };
