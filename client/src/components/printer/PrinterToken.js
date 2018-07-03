@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPrinterToken, createPrinterToken } from '../../actions/printers';
+import {
+  fetchPrinterToken,
+  createPrinterToken,
+  fetchMDMMobile
+} from '../../actions/printers';
 import Moment from 'react-moment';
 import { Header, Segment, Dimmer, Loader, Card } from 'semantic-ui-react';
 import momentjs from 'moment';
@@ -9,7 +13,7 @@ import PrinterTokenRotate from './PrinterTokenRotate';
 
 class PrinterToken extends Component {
   componentDidMount() {
-    this.props.fetchPrinterToken();
+    this.props.fetchMDMMobile();
   }
 
   refreshToken() {
@@ -63,6 +67,13 @@ const mapStateToProps = state => {
   return { isFetching, pToken };
 };
 
-const mapDispatchToProps = { fetchPrinterToken, createPrinterToken };
+const mapDispatchToProps = {
+  fetchPrinterToken,
+  createPrinterToken,
+  fetchMDMMobile
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrinterToken);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrinterToken);

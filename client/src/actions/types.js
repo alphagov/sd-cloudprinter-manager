@@ -10,3 +10,5 @@ export const DELETE_PRINTER_JOB = 'delete_printer_job';
 export const FETCH_PRINTER_TOKEN = 'fetch_printer_token';
 export const FETCH_TOKEN_SUCCESS = 'fetch_token_success';
 export const FETCHING_TOKEN = 'fetching_token';
+
+export const ADDING_MDM = 'adding_mdm';

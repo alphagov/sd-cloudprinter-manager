@@ -95,6 +95,24 @@ module.exports = app => {
     }
   );
 
+  app.get('/api/google/mdm', requireLogin, async (req, res) => {
+    // console.log(req.user);
+    try {
+      const customerId = 'C01ppujwc';
+      let uri = `https://www.googleapis.com/admin/directory/v1/customer/${customerId}/devices/mobile`;
+      const resM = await axios.get(uri, {
+        headers: {
+          Authorization: `OAuth ${req.user.accessToken}`
+        }
+      });
+      // console.log(res.status);
+      return res.send(resM.data);
+    } catch (error) {
+      console.log(error);
+      res.status(418).send(res.error);
+    }
+  });
+
   // app.get('/api/printer/token', requireLogin, (req, res) => {
   //   // fetch token from location to be determined
   //   console.log('we are here');

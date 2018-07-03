@@ -8,8 +8,15 @@ import {
   FETCH_JOBS_SUCCESS,
   DELETE_PRINTER_JOB,
   FETCH_PRINTER_TOKEN,
-  FETCH_TOKEN_SUCCESS
+  FETCH_TOKEN_SUCCESS,
+  ADDING_MDM
 } from './types';
+
+export const fetchMDMMobile = () => async dispatch => {
+  const res = await axios.get('/api/google/mdm');
+  console.log(res.data);
+  dispatch({ type: ADDING_MDM, payload: res.data.mobiledevices });
+};
 
 export const fetchPrinters = () => async dispatch => {
   dispatch(fetchingPrinters());
