@@ -14,9 +14,9 @@ class MDMList extends Component {
     const { mobiles } = this.props;
     return mobiles
       .filter(mobile => mobile.wifiMacAddress !== '')
-      .map(mobile => {
+      .map((mobile, index) => {
         return (
-          <Item>
+          <Item key={index}>
             <Item.Content>
               <Item.Header>{mobile.name[0]}</Item.Header>
               <Item.Meta>{mobile.model}</Item.Meta>

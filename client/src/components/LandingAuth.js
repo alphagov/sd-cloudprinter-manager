@@ -14,11 +14,11 @@ class LandingAuth extends Component {
         </Header>
         <Grid columns={2}>
           <Grid.Column>
-            <PrinterToken />
+            {/* <PrinterToken /> */}
+            <MDMList />
           </Grid.Column>
           <Grid.Column>
-            {/* <PrinterList /> */}
-            <MDMList />
+            <PrinterList />
           </Grid.Column>
         </Grid>
       </div>
