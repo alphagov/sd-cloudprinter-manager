@@ -1,6 +1,7 @@
 const axios = require('axios');
 const requireLogin = require('../middlewares/requireLogin');
-const checkToken = require('../middlewares/checkToken');
+const serviceToken = require('../middlewares/serviceToken');
+// const checkToken = require('../middlewares/checkToken');
 
 module.exports = app => {
   app.get('/api/google/printer/search', requireLogin, async (req, res) => {
@@ -8,7 +9,7 @@ module.exports = app => {
 
     // get the admin token from the db
     // will use this for OAuth
-    const cToken = await checkToken();
+    // const cToken = await checkToken();
 
     // headers: {
     //   Authorization: `OAuth ${req.user.accessToken}`;
@@ -29,7 +30,7 @@ module.exports = app => {
 
     // get the admin token from the db
     // will use this for OAuth
-    const cToken = await checkToken();
+    // const cToken = await checkToken();
 
     const response = await axios.get(uri, {
       headers: {
@@ -45,6 +46,8 @@ module.exports = app => {
     }
   });
 
+  // only really need elevated priviliges for this
+  // service account
   app.get(
     '/api/google/printer/jobs/:printerId',
     requireLogin,
@@ -53,7 +56,7 @@ module.exports = app => {
 
       // get the admin token from the db
       // will use this for OAuth
-      const cToken = await checkToken();
+      // const cToken = await checkToken();
 
       const response = await axios.get(uri, {
         headers: {
@@ -70,6 +73,8 @@ module.exports = app => {
     }
   );
 
+  // only really need elevated priviliges for this
+  // service account
   app.get(
     '/api/google/printer/deletejob/:jobId',
     requireLogin,
@@ -78,7 +83,7 @@ module.exports = app => {
 
       // get the admin token from the db
       // will use this for OAuth
-      const cToken = await checkToken();
+      // const cToken = await checkToken();
 
       const response = await axios.get(uri, {
         headers: {
@@ -94,24 +99,6 @@ module.exports = app => {
       }
     }
   );
-
-  app.get('/api/google/mdm', requireLogin, async (req, res) => {
-    // console.log(req.user);
-    try {
-      const customerId = 'C01ppujwc';
-      let uri = `https://www.googleapis.com/admin/directory/v1/customer/${customerId}/devices/mobile`;
-      const resM = await axios.get(uri, {
-        headers: {
-          Authorization: `OAuth ${req.user.accessToken}`
-        }
-      });
-      // console.log(res.status);
-      return res.send(resM.data);
-    } catch (error) {
-      console.log(error);
-      res.status(418).send(res.error);
-    }
-  });
 
   // app.get('/api/printer/token', requireLogin, (req, res) => {
   //   // fetch token from location to be determined

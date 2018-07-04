@@ -1,2 +1,4 @@
 Docker/db/mysql/mysql.env
 .DS_Store
+server/config/cloud-print-manager-dev-7f946345bbf9.json
+server/config/gcpmanager.json
