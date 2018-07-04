@@ -4,13 +4,7 @@ module.exports = app => {
   app.get(
     '/auth/google',
     passport.authenticate('google', {
-      scope: [
-        'profile',
-        'email',
-        'https://www.googleapis.com/auth/cloudprint',
-        'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly',
-        'https://www.googleapis.com/auth/admin.directory.device.mobile'
-      ]
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/cloudprint']
     })
   );
 

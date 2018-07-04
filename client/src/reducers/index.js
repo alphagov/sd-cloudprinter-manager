@@ -6,7 +6,6 @@ import printerReducer from './printerReducer';
 import printerDetailReducer from './printerDetailReducer';
 import printerJobsReducer from './printerJobsReducer';
 import printerTokenReducer from './printerTokenReducer';
-import { mdmReducer } from './mdmReducer';
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -14,7 +13,6 @@ const reducer = combineReducers({
   printer: printerDetailReducer,
   jobs: printerJobsReducer,
   token: printerTokenReducer,
-  mdm: mdmReducer,
   form: reduxForm
 });
 

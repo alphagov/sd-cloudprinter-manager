@@ -2,7 +2,7 @@ version: "3"
 
 services:
   token:
-    image: mysql:latest
+    image: mysql:5.7
     restart: always
     env_file: ./docker/db/mysql/mysql.env
     volumes:
