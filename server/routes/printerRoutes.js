@@ -57,6 +57,7 @@ module.exports = app => {
       // get the admin token from the db
       // will use this for OAuth
       // const cToken = await checkToken();
+      serviceToken.testCreds(req.params.printerId);
 
       const response = await axios.get(uri, {
         headers: {
