@@ -57,7 +57,7 @@ module.exports = app => {
       // get the admin token from the db
       // will use this for OAuth
       // const cToken = await checkToken();
-      serviceToken.testCreds(req.params.printerId);
+      // serviceToken.testCreds(req.params.printerId);
 
       const response = await axios.get(uri, {
         headers: {
@@ -100,10 +100,4 @@ module.exports = app => {
       }
     }
   );
-
-  // app.get('/api/printer/token', requireLogin, (req, res) => {
-  //   // fetch token from location to be determined
-  //   console.log('we are here');
-  //   res.send('nothing here just yet');
-  // });
 };
