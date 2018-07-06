@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deletePrinterJob, fetchPrinterJobs } from '../../actions/printers';
 import { Dimmer, Loader, Feed } from 'semantic-ui-react';
+import {
+  selectPrinterJobsError,
+  selectPrinterJobs
+} from '../../reducers/selectors';
 
 class PrinterJobs extends Component {
   renderPrinterJobs(jobs) {
-    const { isFetching, deletePrinterJob } = this.props;
+    const { deletePrinterJob } = this.props;
+    const { isFetching } = this.props.jobs;
     if (isFetching || isFetching === undefined)
       return (
         <Dimmer active>
@@ -42,18 +47,22 @@ class PrinterJobs extends Component {
   }
 
   render() {
-    const { jobsList } = this.props;
-    return <Feed>{this.renderPrinterJobs(jobsList)}</Feed>;
+    const { errorList } = this.props;
+    console.log(errorList);
+    return <Feed>{this.renderPrinterJobs(errorList)}</Feed>;
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { jobs } = state;
-  const jobsList = jobs.list;
-  const isFetching = jobs.isFetching;
-  return { jobsList, isFetching, printerid: ownProps.printerid };
+const mapStateToProps = state => {
+  return {
+    errorList: selectPrinterJobsError(state),
+    jobs: selectPrinterJobs(state)
+  };
 };
 
 const mapDispatchToProps = { deletePrinterJob, fetchPrinterJobs };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrinterJobs);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrinterJobs);

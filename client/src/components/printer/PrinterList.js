@@ -7,6 +7,8 @@ import {
   fetchPrinterJobs
 } from '../../actions/printers';
 
+import { selectPrinters } from '../../reducers/selectors';
+
 import { List, Header, Segment, Dimmer, Loader } from 'semantic-ui-react';
 
 class PrinterList extends Component {
@@ -21,15 +23,15 @@ class PrinterList extends Component {
   }
 
   renderPrinters() {
-    const { printersList } = this.props;
-    if (!printersList) {
+    const { isFetching, list } = this.props.printers;
+    if (isFetching || isFetching === undefined) {
       return (
         <Dimmer active>
           <Loader indeterminate>Fetching Printers</Loader>
         </Dimmer>
       );
     }
-    return printersList.map(printer => {
+    return list.map(printer => {
       return (
         <List.Item
           key={printer.id}
@@ -67,12 +69,12 @@ class PrinterList extends Component {
 }
 
 const mapStateToProps = state => {
-  const { printers } = state;
-  const isFetching = printers.isFetching;
-  const printersList = printers.list;
-  return { printersList, isFetching };
+  return { printers: selectPrinters(state) };
 };
 
 const mapDispatchToProps = { fetchPrinters, fetchPrinter, fetchPrinterJobs };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrinterList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrinterList);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Card, Button } from 'semantic-ui-react';
 
 import { fetchPrinterJobs } from '../../actions/printers';
+import { selectPrinter } from '../../reducers/selectors';
 import PrinterJobs from './PrinterJobs';
 
 class PrinterDetail extends Component {
@@ -33,12 +34,14 @@ class PrinterDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  const { printer } = state;
   return {
-    printer
+    printer: selectPrinter(state)
   };
 };
 
 const mapDispatchToProps = { fetchPrinterJobs };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrinterDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrinterDetail);
