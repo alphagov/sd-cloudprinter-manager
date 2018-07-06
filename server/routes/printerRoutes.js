@@ -1,6 +1,5 @@
 const axios = require('axios');
 const requireLogin = require('../middlewares/requireLogin');
-const serviceToken = require('../middlewares/serviceToken');
 // const checkToken = require('../middlewares/checkToken');
 
 module.exports = app => {
